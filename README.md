@@ -2,9 +2,29 @@
 
 
 
-The method named **onRobotFocusGained is use for not to run in other activities and renders on within its class**
+The method named **onRobotFocusGained is use for not to run in other activities**
 ``` bash
 override fun onRobotFocusGained(qiContext: QiContext) {
         this.qiContext = qiContext
     }
 ```
+
+This is a handler destroy
+``` bash
+   private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
+```
+``` bash
+ handler = Handler(Looper.getMainLooper())
+ runnable = Runnable {
+            val intent = Intent(this@1Activity, 2Activity::class.java)
+            startActivity(intent)
+            finish()
+ }
+ handler.postDelayed(runnable, 120000)
+```
+
+``` bash
+handler.removeCallbacks(runnable) // onDestroy
+```
+
