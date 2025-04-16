@@ -9,6 +9,10 @@ override fun onRobotFocusGained(qiContext: QiContext) {
     }
 ```
 
+Gpt prompt
+``` bash
+destroy the handler if its totally finish this app.
+```
 This is a handler destroy
 ``` bash
    private lateinit var handler: Handler
