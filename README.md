@@ -37,3 +37,12 @@ handler.removeCallbacks(runnable) // onDestroy
 
 
 
+
+for production use for human detection
+
+
+
+
+
+
+
