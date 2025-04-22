@@ -32,6 +32,66 @@ This is a handler destroy
 handler.removeCallbacks(runnable) // onDestroy
 ```
 
+The local is inside Locale
+``` bash
+override fun onRobotFocusGained(qiContext: QiContext) {
+        this.qiContext = qiContext
+        val topic: Topic = TopicBuilder.with(qiContext)
+            .withResource(R.raw.main_ar)
+            .build()
+        val locale: Locale = Locale(Language.ARABIC, Region.SAUDI_ARABIA)
+        sayText("يرجى اختيار الاغنية", locale)
+        
+        val qiChatbot: QiChatbot = QiChatbotBuilder
+            .with(qiContext)
+            .withTopic(topic)
+            .withLocale(locale)
+            .build()
+        val executors = HashMap<String, QiChatExecutor>()
+
+        executors["Handshake"] = Handshake(qiContext)
+        qiChatbot.executors = executors
+        val chatbots  = mutableListOf<Chatbot>()
+        chatbots.add(qiChatbot)
+        val chat: Chat = ChatBuilder.with(qiContext).withChatbot(qiChatbot).withLocale(locale).build()
+        chat.async().run()
+        
+        qiChatbot.addOnBookmarkReachedListener {
+            when (it.name) {
+                "shark" -> {
+                    val intent = Intent(this, ArDanceActivity::class.java)
+                    intent.putExtra("videoName", "video_1")
+                    startActivity(intent)
+                }
+                "jump" -> {
+                    val intent = Intent(this, ArDanceActivity::class.java)
+                    intent.putExtra("videoName", "video_2")
+                    startActivity(intent)
+                }
+                "count" -> {
+                    val intent = Intent(this, ArDanceActivity::class.java)
+                    intent.putExtra("videoName", "video_3")
+                    startActivity(intent)
+                }
+                "bus" -> {
+                    val intent = Intent(this, ArDanceActivity::class.java)
+                    intent.putExtra("videoName", "video_4")
+                    startActivity(intent)
+                }
+                "fruit" -> {
+                    val intent = Intent(this, ArDanceActivity::class.java)
+                    intent.putExtra("videoName", "main_video")
+                    startActivity(intent)
+                }
+                "back" -> {
+                    startActivity(Intent(this, SelectLanguageActivity::class.java))
+                }
+            }
+        }
+        touchHead(this.qiContext!!)
+    }
+```
+
 
 
 
